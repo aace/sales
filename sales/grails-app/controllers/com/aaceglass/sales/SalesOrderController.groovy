@@ -15,7 +15,7 @@ class SalesOrderController {
 	def index() {
 		redirect(action: "iq", params: params)
 	}
-	
+//FIXME: Fix pagination params  SalesOrder.withCriteria 	
 	@Secured(['ROLE_SALES', 'ROLE_ADMIN'])
     def all(Integer max) {
 		params.max = Math.min(max ?: 10, 100)
@@ -138,6 +138,8 @@ class SalesOrderController {
        redirect(action: "list")
     }
 	
+	//TODO: Improve security to prevent non-admins to view non-owned records
+	
 	@Secured(['IS_AUTHENTICATED_REMEMBERED','ROLE_ADMIN','ROLE_SALES'])
     def show(Long id) {
 		def salesOrderInstance = []
@@ -156,6 +158,9 @@ class SalesOrderController {
 
         [salesOrderInstance: salesOrderInstance]
     }
+	
+//TODO: Improve security to prevent edits of non-owned records by non-admins
+	
 	@Secured(['IS_AUTHENTICATED_REMEMBERED','ROLE_ADMIN','ROLE_SALES'])
     def edit(Long id) {
     //    def salesOrderInstance = SalesOrder.get(id)
