@@ -1,0 +1,16 @@
+Nov 27, 2012 9:04:46 AM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-bio-8080"]
+Nov 27, 2012 9:04:47 AM org.apache.catalina.core.StandardService startInternal
+INFO: Starting service Tomcat
+Nov 27, 2012 9:04:47 AM org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet Engine: Apache Tomcat/7.0.30
+Nov 27, 2012 9:04:48 AM org.apache.catalina.startup.ContextConfig getDefaultWebXmlFragment
+INFO: No global web.xml found
+Nov 27, 2012 9:05:35 AM org.apache.catalina.core.ApplicationContext log
+INFO: No Spring WebApplicationInitializer types detected on classpath
+Nov 27, 2012 9:05:39 AM org.apache.catalina.core.ApplicationContext log
+INFO: Initializing Spring root WebApplicationContext
+Nov 27, 2012 9:06:32 AM org.apache.catalina.core.ApplicationContext log
+INFO: Initializing Spring FrameworkServlet 'grails'
+Nov 27, 2012 9:06:32 AM org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["http-bio-8080"]

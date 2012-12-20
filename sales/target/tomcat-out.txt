@@ -1,0 +1,6 @@
+
+Configuring Spring Security Core ...
+... finished configuring Spring Security Core
+
+Fresh Database. Creating ADMIN user.
+Server running. Browse to http://localhost:8080/sales
