@@ -19,9 +19,8 @@
 		
 	</head>
 
-	<body>
-	
-		<div id="aaceLogo" role="banner"><a href="/"><img src="${resource(dir: 'images', file: 'aace_logo_.jpg')}" height="75" alt="AACE"/></a></div>
+	<body>	
+		<div id="aaceLogo" role="banner"><a href="/"><img src="${resource(dir: 'images', file: 'aacelogo.png')}" width="124" height="80" alt="AACE"/></a></div>
 		<g:layoutBody/>
 		<div class="footer" role="contentinfo">
 		<sec:ifLoggedIn>

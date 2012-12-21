@@ -9,8 +9,8 @@
 </head>
 <body><sec:ifLoggedIn>
   <div class="container">
-  	<h1 class="span-24 last">Welcome <sec:loggedInUserInfo field="username"></sec:loggedInUserInfo>! </h1>
-  	<div class="span-24">
+  	<h2 class="span-24 last">Welcome <sec:loggedInUserInfo field="username"></sec:loggedInUserInfo>! </h2>
+  	<!-- <div class="span-24"> -->
   		<!-- <div class="span-16">
   			<h2></h2>
   		</div> -->	
@@ -87,7 +87,7 @@
   			</div>
   		 -->
   	</div> 
-  </div>
+  <!-- </div> -->
   </sec:ifLoggedIn>
 </body>
 </html>
