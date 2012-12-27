@@ -20,7 +20,7 @@
 	</head>
 
 	<body>	
-		<div id="aaceLogo" role="banner"><a href="/"><img src="${resource(dir: 'images', file: 'aacelogo.png')}" width="124" height="80" alt="AACE"/></a></div>
+		<div id="aaceLogo" role="banner"><a href="/"><img src="${resource(dir: 'images', file: 'aacelogo.png')}" width="125" height="90" alt="AACE"/></a></div>
 		<g:layoutBody/>
 		<div class="footer" role="contentinfo">
 		<sec:ifLoggedIn>
