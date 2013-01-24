@@ -1,3 +1,31 @@
+2013-01-24 Gary Stewart <atoi2008@gmail.com>
+Version 1.2.1 Update
+	
+	* Push to git branch master
+
+2013-01-15 Gary Stewart <atoi2008@gmai.com>
+
+	* Implemented Signature Panel
+	* Minor Bugfixes
+	* Changed labeling to be more Human friendly
+
+2013-01-07 Gary Stewart <atoi2008@gmail.com
+
+	* Added ruby support via JRuby.
+	* SignaturePanel jQuery canvas elements added to sales order (create) form
+		
+
+2013-01-03 Gary Stewart <atoi2008@gmail.com>
+	
+	* Stripped kbw-signature-panel js code
+
+
+2012-12-27 Gary Stewart <atoi2008@gmail.com>
+Version 1.1.2 Update
+
+	* create.gsp (SalesOrder): excanvas.js should now render correctly in IE
+	* 
+
 2012-12-21 Gary Stewart <atoi2008@gmail.com>
 Version 1.1.1 Update
 

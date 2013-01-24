@@ -6,6 +6,53 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'salesOrder.label', default: 'SalesOrder')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
+	<!--  Signature panel  -->	
+	<!--[if lt IE 9]><script type="text/javascript" src="${resource(dir: 'js', file: 'excanvas.compiled.js')}"></script><![endif]-->
+    <script type="text/javascript" src="${resource(dir: 'js', file: 'jquery-1.4.4.min.js')}"></script>
+    <script type="text/javascript" src="${resource(dir: 'js', file: 'jquery.signature-panel.js')}"></script>
+
+    <script type="text/javascript">
+        var playing, lastSignature;
+        playing = false;
+		
+        function signatureOK(signatureData) {
+
+        	lastSignature = signatureData;
+            $("#sig-panel").signaturePanel("clear");
+        }
+
+        function signatureCancel() {
+            alert("The user clicked Cancel.");
+        }
+
+        function playbackCallback(frameTime, totalTime) {
+            return !playing;
+        }
+
+        function onTargetClick() {
+            if (lastSignature) {
+                playing = !playing;
+                if (playing) {
+                    $("#sig-target").signaturePanel("animateClickstreamToCanvas", lastSignature, playbackCallback);
+                } else {
+                    $("#sig-target").signaturePanel("drawClickstreamToCanvas", lastSignature);
+                }
+            } else {
+                alert("Enter a signature first.");
+            }
+        }
+
+        $(document).ready(function() {
+            $("#sig-panel").signaturePanel({
+                okCallback: signatureOK,
+                cancelCallback: signatureCancel
+            });
+            $("#sig-target").click(onTargetClick);
+			//set the hidden field value
+            $('#signatureData').val(${salesOrderInstance.sig});
+        });
+
+    </script>
 	</head>
 	<body>
 		<a href="#show-salesOrder" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -344,13 +391,22 @@
 			
 				<g:if test="${salesOrderInstance?.secUser}">
 				<li class="fieldcontain">
-					<span id="secUser-label" class="property-label"><g:message code="salesOrder.secUser.label" default="Sec User" /></span>
+					<span id="secUser-label" class="property-label"><g:message code="salesOrder.secUser.label" default="Sold By" /></span>
 					
 						<span class="property-value" aria-labelledby="secUser-label"><g:link controller="secUser" action="show" id="${salesOrderInstance?.secUser?.id}">${salesOrderInstance?.secUser?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>
-			
+				
+				<!-- Signature Panel -->
+				<g:if test="${salesOrderInstance?.sig}">
+				<li class="fieldcontain">
+					<span id="sig-label" class="property-label"><g:message code="saleOrder.sig.label" default="Customer Signature" /></span>
+					
+						<span class="property-value" aria-labelledby="sig-label"><canvas id="sig-target" height="100" width="250" style="border: 1px solid gray;" ></canvas></span>
+				</li>
+				</g:if>
+				<!-- End Panel -->
 			</ol>
 			<g:form>
 				<fieldset class="buttons">

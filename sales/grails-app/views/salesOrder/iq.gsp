@@ -9,13 +9,13 @@
 </head>
 <body><sec:ifLoggedIn>
   <div class="container">
-  	<h2 class="span-24 last">Welcome <sec:loggedInUserInfo field="username"></sec:loggedInUserInfo>! </h2>
-  	<!-- <div class="span-24"> -->
-  		<!-- <div class="span-16">
+  	<h2 class="span-24 last"></h2>
+  	 <div class="span-24">
+  		 <div class="span-16">
   			<h2></h2>
-  		</div> -->	
+  		</div>	
   		<div class="nav" role="navigation">
-  			<ul class="buttons"><li><a href="/SalesOrder/create" class="create">New Sale</a></li>
+  			<ul class="buttons"><li><a href="./create" class="create">New Sale</a></li>
   				<sec:ifAnyGranted roles = "ROLE_ADMIN">
   					<ul class="show"><li><a href="/SecUser/list">Users</a></li>
   					<ul class="show"><li><a href="/SecUserSecRole/create">Roles</a></li>
@@ -87,7 +87,7 @@
   			</div>
   		 -->
   	</div> 
-  <!-- </div> -->
+  </div>
   </sec:ifLoggedIn>
 </body>
 </html>

@@ -5,36 +5,49 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'salesOrder.label', default: 'Sales Order')}" />
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
-		
-				<!--  for jQuery signature -->
-		<link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/themes/south-street/jquery-ui.css" rel="stylesheet">
-		<link type="text/css" href="${resource(dir: 'css', file: 'jquery.signature.css')}" rel="stylesheet">
-		<style type="text/css">
-			.kbw-signature { width: 500px; height: 150px; }
-		</style>
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
-		
-		<!--[if IE]>
-			<script type="text/javascript" src="excanvas.js"></script>
-		<![endif]-->
-		
-		<script type="text/javascript" src="${resource(dir: 'js', file: 'jquery.signature.js')}"></script>
-		<script type="text/javascript">
-		$(function() {
-			$('#sig').signature();
-			$('#clear').click(function() {
-				$('#sig').signature('clear');
-			});
-			$('#json').click(function() {
-				alert($('#sig').signature('toJSON'));
-			});
-			$('#captureSignature').signature({syncField: "#jsonSignature"}); 
-		});
+		<!--[if lt IE 9]><script type="text/javascript" src="${resource(dir: 'js', file: 'excanvas.compiled.js')}"></script><![endif]-->
+    <script type="text/javascript" src="${resource(dir: 'js', file: 'jquery-1.4.4.min.js')}"></script>
+    <script type="text/javascript" src="${resource(dir: 'js', file: 'jquery.signature-panel.js')}"></script>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'jquery.signature-panel.css')}" type="text/css"/>
+<!--  jQuery signature element code begins here -->
+	<script type="text/javascript">
+        function signatureOK(signatureData) {
+            // Send the signature to the server and generate an image file.
+            $.ajax({
+                url:"processSignature",
+                type:"POST",
+                data:{"signature": JSON.stringify(signatureData)},
+                //contentType:"application/json; charset=utf-8",
+                success: function(data, textStatus, jqXHR){
+                    //set the hidden field value
+                    $('#sig').val(JSON.stringify(signatureData));
+                    //show signature on same page as preview (optional)
+                    $("#latest-signature").signaturePanel("drawClickstreamToCanvas", signatureData);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }
+            });
+            $("#sig-panel").signaturePanel("clear");
+            
+        }
 
-		</script>
+		
+        function signatureCancel() {
+            alert("You clicked Cancel.");
+        }
+
+        $(document).ready(function() {
+            $("#sig-panel").signaturePanel({
+                okCallback: signatureOK,
+                cancelCallback: signatureCancel
+            });
+        });
+	</script>
 	</head>
 	<body>
+		
 		<a href="#create-salesOrder" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
@@ -58,6 +71,7 @@
 				<fieldset class="form">
 					<g:render template="form"/>
 				</fieldset>
+
 				<fieldset class="buttons">
 					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
 				</fieldset>

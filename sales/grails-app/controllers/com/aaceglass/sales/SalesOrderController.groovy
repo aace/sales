@@ -3,6 +3,7 @@ package com.aaceglass.sales
 import org.springframework.dao.DataIntegrityViolationException
 import grails.plugins.springsecurity.Secured
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
+import grails.converters.*
 
 
 class SalesOrderController {
@@ -151,7 +152,7 @@ class SalesOrderController {
 			salesOrderInstance = SalesOrder.get(id)
 		}
 		if (!salesOrderInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'salesOrder.label', default: 'SalesOrder'), id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'salesOrder.label', default: 'Sales   Order'), id])
             redirect(action: "list")
             return
         }
@@ -177,7 +178,7 @@ class SalesOrderController {
 			salesOrderInstance = SalesOrder.get(id)
 		}
 		if (!salesOrderInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [message(code: 'salesOrder.label', default: 'SalesOrder'), id])
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'salesOrder.label', default: 'Sales Order'), id])
 			redirect(action: "list")
 			return
 		}
@@ -188,7 +189,7 @@ class SalesOrderController {
     def update(Long id, Long version) {
         def salesOrderInstance = SalesOrder.get(id)
         if (!salesOrderInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'salesOrder.label', default: 'SalesOrder'), id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'salesOrder.label', default: 'Sales Order'), id])
             redirect(action: "list")
             return
         }
@@ -210,7 +211,7 @@ class SalesOrderController {
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'salesOrder.label', default: 'SalesOrder'), salesOrderInstance.id])
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'salesOrder.label', default: 'Sales Order'), salesOrderInstance.id])
         redirect(action: "show", id: salesOrderInstance.id)
     }
 	
@@ -218,19 +219,31 @@ class SalesOrderController {
     def delete(Long id) {
         def salesOrderInstance = SalesOrder.get(id)
         if (!salesOrderInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'salesOrder.label', default: 'SalesOrder'), id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'salesOrder.label', default: 'Sales Order'), id])
             redirect(action: "list")
             return
         }
 
         try {
             salesOrderInstance.delete(flush: true)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'salesOrder.label', default: 'SalesOrder'), id])
+            flash.message = message(code: 'default.deleted.message', args: [message(code: 'salesOrder.label', default: 'Sales Order'), id])
             redirect(action: "list")
         }
         catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'salesOrder.label', default: 'SalesOrder'), id])
+            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'salesOrder.label', default: 'Sales Order'), id])
             redirect(action: "show", id: id)
         }
     }
+	// Capture Customer Signature JSON Data, Processes to Image, and Stream to Database
+	@Secured(['ROLE_ADMIN','ROLE_SALES'])
+	def processSignature() {
+		flash.message = message(code: 'default.created.message', args: [message(code: 'salesOrder.label', default: 'Signature'), ])
+		def signature = params.signature
+		log.debug(signature)
+		response.contentType = "application/json"
+		render """{"ok":true}"""
+		[signature: signature]		
+	}
 }
+	
+

@@ -1,6 +1,6 @@
 <%@ page import="com.aaceglass.sales.SalesOrder" %>
 
-<calendar:resources lang="en" theme="blue"/>
+<calendar:resources lang="en" theme="blue2"/>
 
 <div class="fieldcontain ${hasErrors(bean: salesOrderInstance, field: 'jobType', 'error')} required">
 	<label for="jobType">
@@ -258,16 +258,16 @@
 	<g:textArea name="notes" cols="40" rows="5" maxlength="1024" value="${salesOrderInstance?.notes}"/>
 </div>
 
-<!-- jQuery signature element --> 
-<div class="fieldcontain" ${hasErrors(bean: salesOrderInstance, field: 'sig','error') } ">
-	<label for="sig">
-	<g:message code="salesOrder.sig.label" default="Signature" />
-	</label>
-	<div id="sig" class="kbw-signature"></div>
-	<p style="clear: both;"><button id="clear">Clear</button> <button id="json">To JSON</button></p>
-</div>
-<!--End of signature element -->
 	
+    <div class="fieldcontain ${hasErrors(bean: salesOrderInstance, field: 'sig','error')}">
+    	<label for="sig">
+    		<g:message code="salesOrder.sig.label" default="Customer Signature" />
+    	</label>
+    </div>
+    	<div id="sig-panel" style="width: 500px; height: 150px; border: 1px solid gray; margin: 0 auto;"></div>
+		
+<!-- End of Signature Panel -->
+
 <sec:ifAllGranted roles="ROLE_ADMIN">
 	<div class="fieldcontain ${hasErrors(bean: salesOrderInstance, field: 'orderStatus', 'error')} required">
 		<label for="orderStatus">
